@@ -1,37 +1,27 @@
-import React, { createContext, useContext, useState, useMemo } from 'react';
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import React, { createContext, useState, useMemo } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
 import globalTheme from '@Theme/index';
+import Layer from '@Components/Base/Layout';
+import Header from '@Components/Common/Header';
 
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function ColorModeConsumer(): React.ReactElement {
-  // States
-  const theme = useTheme();
-  const currentContext = useContext(ColorModeContext);
-
-  // Main
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        p: 3,
-      }}
-    >
-      <ButtonBase onClick={currentContext.toggleColorMode}>
-        current theme: {theme.palette.mode}
-      </ButtonBase>
-    </Box>
+    <React.Fragment>
+      <Header />
+      <Layer>
+        <div>side bar: show all tags, archives (display by year)</div>
+        <div>posts</div>
+      </Layer>
+    </React.Fragment>
   );
 }
 
 export default function App(): React.ReactElement {
   // States
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const [mode, setMode] = useState<'light' | 'dark'>('dark');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
