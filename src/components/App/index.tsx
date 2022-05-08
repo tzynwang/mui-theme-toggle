@@ -1,31 +1,57 @@
-import React, { memo } from 'react'
-import classNames from 'classnames'
+import React, { createContext, useContext, useState, useMemo } from 'react';
+import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import ButtonBase from '@mui/material/ButtonBase';
+import globalTheme from '@Theme/index';
 
-import Styles from './index.module.css'
+const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-function App(): React.ReactElement {
+function ColorModeConsumer(): React.ReactElement {
+  // States
+  const theme = useTheme();
+  const currentContext = useContext(ColorModeContext);
+
+  // Main
   return (
-    <main className={classNames(Styles.main)}>
-      <div>
-        Hello world, this React APP is created by{' '}
-        <code className={classNames(Styles.mainCode)}>npx create-react-app with template --choffee</code>.
-      </div>
-      <div>
-        Author: Charlie (Tzu Yin) |{' '}
-        <a href="https://github.com/tzynwang" target="_blank" className={Styles.mainAnchor}>
-          GitHub
-        </a>{' '}
-        |{' '}
-        <a href="https://tzynwang.github.io/" target="_blank" className={Styles.mainAnchor}>
-          Blog
-        </a>{' '}
-        |{' '}
-        <a href="https://www.npmjs.com/~tzyn.wang" target="_blank" className={Styles.mainAnchor}>
-          npm Packages
-        </a>
-      </div>
-    </main>
-  )
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        p: 3,
+      }}
+    >
+      <ButtonBase onClick={currentContext.toggleColorMode}>
+        current theme: {theme.palette.mode}
+      </ButtonBase>
+    </Box>
+  );
 }
 
-export default memo(App)
+export default function App(): React.ReactElement {
+  // States
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    []
+  );
+  const theme = useMemo(
+    () => createTheme({ ...globalTheme, palette: { mode } }),
+    [mode]
+  );
+
+  // Main
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <ColorModeConsumer />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
