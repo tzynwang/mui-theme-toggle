@@ -15,7 +15,7 @@ const Base = styled('div')(({ theme }) => ({
 
 function BaseLayout(props: LayerProps): React.ReactElement {
   const { children } = props;
-  return <Base>{children}</Base>;
+  return <Base className="BaseLayout">{children}</Base>;
 }
 
 export default memo(BaseLayout);

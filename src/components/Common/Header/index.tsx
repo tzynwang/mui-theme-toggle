@@ -32,7 +32,7 @@ function Header(): React.ReactElement {
 
   // Main
   return (
-    <HeaderBase>
+    <HeaderBase className="HeaderBase">
       <Layout>
         <HeaderContent>
           <div>普通文組</div>
@@ -44,10 +44,10 @@ function Header(): React.ReactElement {
               <RssFeedIcon />
             </Button>
             <Button>
-              <GitHubIcon />
+              <EmailIcon />
             </Button>
             <Button>
-              <EmailIcon />
+              <GitHubIcon />
             </Button>
           </div>
         </HeaderContent>

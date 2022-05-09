@@ -12,7 +12,13 @@ function ColorModeConsumer(): React.ReactElement {
     <React.Fragment>
       <Header />
       <Layer>
-        <div>side bar: show all tags, archives (display by year)</div>
+        <div>
+          <div>side bar: show all tags, archives (display by year) </div>
+          <div>
+            可參考 docusaurus 的做法，在手機版面下 header 追加 expend
+            按鈕，點開來可以看 all tas 與 archives
+          </div>
+        </div>
         <div>posts</div>
       </Layer>
     </React.Fragment>
