@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import globalTheme from '@Theme/index';
 import Layer from '@Components/Base/Layout';
 import Header from '@Components/Common/Header';
+import Side from '@Components/Common/Side';
 
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
@@ -13,11 +14,12 @@ function ColorModeConsumer(): React.ReactElement {
       <Header />
       <Layer>
         <div>
-          <div>side bar: show all tags, archives (display by year) </div>
+          {/* <div>side bar: show all tags, archives (display by year) </div>
           <div>
             可參考 docusaurus 的做法，在手機版面下 header 追加 expend
             按鈕，點開來可以看 all tas 與 archives
-          </div>
+          </div> */}
+          <Side />
         </div>
         <div>posts</div>
       </Layer>
